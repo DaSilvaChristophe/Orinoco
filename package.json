@@ -1,0 +1,23 @@
+{
+  "name": "orinoco",
+  "version": "1.0.0",
+  "description": "projet 5",
+  "main": "index.js",
+  "dependencies": {
+    "bootstrap": "^5.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CrisEmilioSilva/DaSilvaChristophe_5_030821.git"
+  },
+  "author": "Cris",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CrisEmilioSilva/DaSilvaChristophe_5_030821/issues"
+  },
+  "homepage": "https://github.com/CrisEmilioSilva/DaSilvaChristophe_5_030821#readme"
+}

@@ -1,0 +1,79 @@
+#presentation-product
+    
+{
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+
+    .div-img-page-product
+    {
+        width: 90%;
+        margin: 10px auto;
+
+        .img-page-product
+        {
+            width: $width100;
+            object-fit: cover; 
+        }
+    }
+        
+    .div-text-page-product
+    {
+        width: 85%;
+        margin: 10px auto;
+    
+        .title-page-product
+        {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            padding-top: 5px;
+        }
+
+        .description-page-product
+        {
+            margin: 0 5px;
+        }
+
+        .price-page-product
+        {
+            font-size: 1.4em;
+        }
+
+        .div-form-page-product
+        {
+            margin-bottom: 8px;
+
+            .input-page-product
+            {
+                width: 50%;
+                height: 80%;
+                margin-top: 5px;
+            }
+        }
+    }
+    
+    .btn-page-product
+    {
+        align-items: center;
+        width: 50%;
+        height: 35px;
+        margin: 3px auto;            
+        padding: 3px 0;
+
+        @media (max-width: 448px) {
+            width: 70%;
+        }
+        
+        .link-page-product
+        {
+            width: $width100;
+            height: $height100;
+        }
+    }
+
+    .link-return-home
+    {
+        margin-bottom: 2px;
+    }
+}

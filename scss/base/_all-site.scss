@@ -1,0 +1,18 @@
+*
+{
+    box-sizing: border-box;
+}
+
+html,body
+{
+    width: $width100;
+    height: auto;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/* Couleur thème personnalisé */
+
+.bg-colortheme
+{
+    background: $gradient;
+}
