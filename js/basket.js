@@ -33,8 +33,7 @@ function basketViewElements(){
         basketView.appendChild(emptyBasket)
         .classList.add("empty-basket");
         emptyBasket.innerHTML = "Votre panier est vide";
-        document.getElementsByClassName("btn-remove-basket").display = "none";
-
+        
     } else {  // Si il y a des produits dans le panier 
         
         let structureBasket = [];
@@ -70,33 +69,34 @@ function deleteProductAlone(){
         buttonRemoveProduct[j].addEventListener('click',function(){
         
         let idSelectDelete = productRegisteredLocalStorage[j].id;
-        // La méthode filter() crée et retourne un nouveau tableau contenant tous les éléments du tableau (pour renvoyer les produits qu'il reste dans le local storage sans le produit supprimer)
+        // La méthode filter() crée et retourne un nouveau tableau contenant tous les éléments du tableau (pour renvoyer les produits dans le local storage sans le produit supprimer)
         productRegisteredLocalStorage = productRegisteredLocalStorage.filter((el) => el.id !== idSelectDelete);
         localStorage.setItem("product", JSON.stringify(productRegisteredLocalStorage));
         window.location.href = "basket.html";
-        
         });
     };
 };
 
 /* Div qui regroupe le prix total du panier + le bouton supprimer le panier */
 
+const divHtmlTotalPrice = document.getElementById("total-price");
+
 const divTotalPrice = document.createElement("div");
-    basketView.appendChild(divTotalPrice)
+    divHtmlTotalPrice.appendChild(divTotalPrice)
     .classList.add("div-total-basket");
 
-// Calcul du prix total du panier
+// Calcul du prix total du panier et la création d'un tableau pour enregistrer le prix total afin de l'afficher sur la page confirmation de commande
 
-let totalPriceForConfirmation = []; // !! tableau qui va permettre d'enregistrer le prix total afin de l'afficher sur la page confirmation de commande
+let totalPriceForConfirmation = []; // !! tableau pour page confirmation de commande
 
 function calculTotalBasket(){
     
     tabTotalPrice = []; 
     
     for (k = 0; k < productRegisteredLocalStorage.length; k++) {
-            
+        
         let pricesProductBasket = productRegisteredLocalStorage[k].price;
-        tabTotalPrice.push(pricesProductBasket);
+        tabTotalPrice.push(pricesProductBasket);  
     }
 
     // Méthode reduce permet de faire l'addition des prix dans le panier pour en faire le prix total (REDUCE permet de réduire a une seul valeur)
@@ -105,7 +105,7 @@ function calculTotalBasket(){
     
     let calculTotalPrice = tabTotalPrice.reduce(reducer,0);
 
-    totalPriceForConfirmation.push(calculTotalPrice) // !! push dans le tableau ligne 96 pour affichage du prix total dans la page de confiramtion
+    totalPriceForConfirmation.push(calculTotalPrice); // !! push dans le tableau ligne 96 pour affichage du prix total dans la page de confiramtion
     
     // Affichage du prix total dans le HTML
     
@@ -114,7 +114,7 @@ function calculTotalBasket(){
     .classList.add("total-price-basket");
     totalPrice.innerHTML = `Prix total : ${calculTotalPrice} €`;
 };
-    
+
 // Ajout du bouton supprimer le panier (tous les produits)
 
 function deleteAllBasket(){
@@ -255,15 +255,17 @@ document.addEventListener('DOMContentLoaded', function(){
     basketBarPresentation();
     basketViewElements();
     deleteProductAlone();
-    
+
     // Apel des fonctions qui calcul le prix total et supprime le panier entier uniquement si il y a un ou plusieurs produits dans le panier
-    if (productRegisteredLocalStorage === null) {
+
+    if (localStorage.getItem("product") === "[]") {
     
-        document.getElementsByClassName("total-price-basket").display = "none";
-    } else {
-        
+        localStorage.clear();
+        document.getElementById("total-price").display = none;
+    
+    } else if (localStorage.getItem("product") !== null) {
+    
         calculTotalBasket();
         deleteAllBasket();
-    }
-
+    };
 });

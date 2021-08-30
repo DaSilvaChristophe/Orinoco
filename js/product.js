@@ -89,10 +89,10 @@ function presentationProduct(){
 
         /* récupération des données produits séléctionner par l'utilisateur pour le local storage et envoi au panier */
         
-        let linkBasket = document.querySelector(".link-page-product")
+        let linkBasket =  document.querySelector(".link-page-product")
         .addEventListener('click',function(event){
-            
-            event.preventDefault();
+
+            event.stopPropagation();
             
             // récupèration de la valeur de l'input qui permet le choix de la quantité produit
                
@@ -106,11 +106,7 @@ function presentationProduct(){
                 price: (value.price * quantity),
                 id: value._id,
                 quantity: quantity
-            };
-
-            // JSON.parse = permet la convertion des données pour récupérer celle-ci dans le local storage (format JSON => Objet JavaScript) 
-        
-            let productRegisteredLocalStorage = JSON.parse(localStorage.getItem("product")); 
+            }; 
         
             // Fonction d'alerte qui confirme l'ajout au panier par l'utilisateur et choix pour l'utilisateur (aller au panier où retournez à l'accueil et continuer ces achats)
 
@@ -126,29 +122,32 @@ function presentationProduct(){
             // Création de la fonction qui permet l'ajout produits au local storage
             
             function additionLocalStorageProduct(){
-                
+            
                 if (localStorage.getItem("product") !== null) {
-                
-
-                    const items = JSON.parse(localStorage.getItem("product")); 
                     
+                    // JSON.parse = permet la convertion des données pour récupérer celle-ci dans le local storage (format JSON => Objet JavaScript) 
                     
-                    items.forEach((item) => {
-                        if (item.name === item.name){
-                            valuesProduct.quantity = item.quantity + valuesProduct.quantity;
-                            productRegisteredLocalStorage.push(valuesProduct.quantity)
-                        } else {
-                            productRegisteredLocalStorage.push(valuesProduct)
-                        }
+                    items = JSON.parse(localStorage.getItem("product"));
+                    
+                    for (let item of items){
                         
-                    });
-                
-                    // JSON.stringify = convertion des données pour l'envoi dans local storage (Objet JavaScript => JSON);
-                    localStorage.setItem("product", JSON.stringify(productRegisteredLocalStorage));
+                        if(valuesProduct.name === item.name){
+                            
+                            item.quantity = valuesProduct.quantity;
+                            item.price = valuesProduct.price;
+                            
+                        } if(valuesProduct.name !== item.name) {
+                           
+                            items.push(valuesProduct);   
+                        }
+                    }
+                    
+                    localStorage.setItem("product", JSON.stringify(items));
                     alertConfirmation()
+
                 } else { 
                     // Création d'un tableau pour le push des valeurs produits pour l'envoi au local storage
-                    productRegisteredLocalStorage = [];
+                    let productRegisteredLocalStorage = [];
                     // envoie les données des valeurs produit dans le tableau ligne 142 "productRegisteredLocalStorage"
                     productRegisteredLocalStorage.push(valuesProduct);
                      // JSON.stringify = convertion des données pour l'envoi dans local storage (Objet JavaScript => JSON);
@@ -156,12 +155,14 @@ function presentationProduct(){
                     
                     alertConfirmation()
                 }  
-            };  
+            };
 
             additionLocalStorageProduct();
+                 
         });
     });
 };
+
 
 // apel des fonctions après que le HTML soit totalement chargé
 
@@ -169,5 +170,5 @@ document.addEventListener('DOMContentLoaded', function(){
     
     structureHtml();
     presentationProduct();
-
+    
 });
