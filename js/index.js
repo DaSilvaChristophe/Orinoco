@@ -1,4 +1,4 @@
-// fonction qui permet l'apel et l'affichage des produits de l'API sur la page d'accueil 
+// fonction qui permet l'apel des produits a l'API et l'affichage sur la page d'accueil 
 
 function listProducts(){ 
     
@@ -6,14 +6,9 @@ function listProducts(){
     
     .then(function(resultPromise) {  
         if (resultPromise.ok) {
-            return resultPromise.json(); // Retour de l'API et récupération de la requête au format .json
+            return resultPromise.json(); // Réponse de l'API dans une promise et récupération de celle-ci au format JSON 
         }
     })
-
-    .catch(function(err) {
-        document.getElementById("oursteddies") // Catch (Gestion d'erreur) - Affichage phrase d'erreur pour informer l'utilisateur
-        .innerHTML = "Connectez-vous sur le port logiciel 3000 afin de voir notre collection de Teddies, si le problème persiste contactez-nous directement via le lien contact de la page.";
-     })
     
     .then(function(values){ 
 
@@ -21,7 +16,7 @@ function listProducts(){
     
         for (let article in articles) { 
 
-        /* Création de structure HTML pour la mise en page des produits et apel des valeurs produits via l'API */
+        /* Création dynamique d'éléments dans le DOM pour la structure HTML, apel des valeurs produits de l'API et dispersion de celle-ci dans la structure */
 
         const sectionProducts = document.getElementById("list-products");
         
@@ -65,12 +60,19 @@ function listProducts(){
             newElementButton.appendChild(newElementLink)
             .classList.add("link-products");
             newElementLink.textContent = "Info Teddie"; 
-            // Création de lien pour l'affichage de l'id produit dans l'url et pointage vers la page product
+            // lien qui permet l'affichage de l'id produit dans l'url et qui va servir a afficher le produit seul sur la page product
             newElementLink.href = `product.html?id=${values[article]._id}`;   
         }
-    });
+    })
+
+    // Catch (Gestion d'erreur de la requète) - Affichage phrase d'erreur pour informer l'utilisateur
+    
+    .catch(function(err) {
+        document.getElementById("oursteddies")
+        .innerHTML = "Connectez-vous sur le port logiciel 3000 afin de voir notre collection de Teddies, si le problème persiste contactez-nous directement via le lien contact de la page.";
+     })
 };
 
-// apel de la fonction qui permet l'apel et l'affichage des produits de l'API sur la page d'accueil après que le HTML est totalement chargé
+// apel de la fonction qui permet l'apel et l'affichage des produits de l'API sur la page d'accueil après que le HTML soit totalement chargé
 
 document.addEventListener('DOMContentLoaded', listProducts()); 

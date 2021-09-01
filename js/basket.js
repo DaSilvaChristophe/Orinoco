@@ -87,7 +87,7 @@ const divTotalPrice = document.createElement("div");
 
 // Calcul du prix total du panier et la création d'un tableau pour enregistrer le prix total afin de l'afficher sur la page confirmation de commande
 
-let totalPriceForConfirmation = []; // !! tableau pour page confirmation de commande
+let totalPriceForConfirmation = []; // !!!!! tableau pour page confirmation de commande
 
 function calculTotalBasket(){
     
@@ -105,7 +105,7 @@ function calculTotalBasket(){
     
     let calculTotalPrice = tabTotalPrice.reduce(reducer,0);
 
-    totalPriceForConfirmation.push(calculTotalPrice); // !! push dans le tableau ligne 96 pour affichage du prix total dans la page de confiramtion
+    totalPriceForConfirmation.push(calculTotalPrice); // !!!!! push dans le tableau ligne 96 pour affichage du prix total dans la page de confiramtion
     
     // Affichage du prix total dans le HTML
     
@@ -115,7 +115,7 @@ function calculTotalBasket(){
     totalPrice.innerHTML = `Prix total : ${calculTotalPrice} €`;
 };
 
-// Ajout du bouton supprimer le panier (tous les produits)
+// Ajout du bouton supprimer le panier (localStorage.removeItem("product") = suppression de la clé produit dans le local storage)
 
 function deleteAllBasket(){
     
@@ -134,14 +134,14 @@ function deleteAllBasket(){
 
 // Affichage du formulaire et validation données formulaire (Bootstrap & pattern regex HTML)
 
-let sectionFormulaireClient = document.getElementById("formulaire");
+    let sectionFormulaireClient = document.getElementById("formulaire");
 
     let formulaireClient = [];
 
     formulaireClient = formulaireClient + 
     
     `<h2 class="container mt-3 pt-2 text-center border-top border-dark">Formulaire de commande</h2>
-    <form class="container needs-validation" novalidate>
+    <form id="form" action="confirmation.html" class="container needs-validation" novalidate>
         <div class="form-group">
             <div class="form-row">
                 <input type="text" id="inputFirstName" class="form-control" value="" placeholder="Votre prénom" pattern="^[^ -] ?[A-Za-z -]+$" required>
@@ -174,32 +174,33 @@ let sectionFormulaireClient = document.getElementById("formulaire");
                 <div class="invalid-feedback">Saisie Incorrect - Veuillez saisir un email valide.</div>
             </div>
         </div>
-        <button type="submit" class="btn-form btn-success mt-2 text-white" onclick="getValue();">Commander</button>
+        <button type="submit" onSubmit="submit()" class="btn-form btn-success mt-2 text-white" onclick="getValue();">Commander</button>
     </form>`;
 
     sectionFormulaireClient.innerHTML = formulaireClient;
 
 // Fonction qui empêche l'envoi du formulaire si un champ a été mal rempli et applique les styles de validation aux différents éléments 
 
-(function() {  // Fonction (Bootstrap)
-    'use strict';
-    window.addEventListener('load', function() {
-      let forms = document.getElementsByClassName('needs-validation');
-      let validation = Array.prototype.filter.call(forms, function(form) {
-        form.addEventListener('submit', function(event) {
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-          form.classList.add('was-validated');
-        }, false);
-      });
-    }, false);
-})();
+(function () {
+    'use strict'
+  
+    var forms = document.querySelectorAll('.needs-validation')
+  
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          } 
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
 
 function getValue() {
     
-    // Sélection des éléments input afin de récupérer leur valeur
+    // Sélection des valeurs saisie dans les champs formulaires 
     
     let firstNameForm = document.getElementById("inputFirstName").value;
     let lastNameForm = document.getElementById("inputLastName").value;
@@ -243,9 +244,13 @@ function getValue() {
     .then(function(value){
           
         localStorage.setItem("orderId", value.orderId);
-        localStorage.setItem("priceTotal", totalPriceForConfirmation); // tableau ligne 96
-        window.location.href = "confirmation.html";
-    });
+        localStorage.setItem("priceTotal", totalPriceForConfirmation); // tableau ligne 96 
+        document.getElementById("form").onsubmit = function()
+        {
+            window.location.href("confirmation.html");
+            
+        }
+    }) 
 };
 
 // apel des fonctions après que le HTML soit totalement chargé

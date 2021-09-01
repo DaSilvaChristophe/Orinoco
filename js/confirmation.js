@@ -1,10 +1,10 @@
-// Récupération de l'id de commande et du prix total dans le local storage pour affichage page & suppression du panier
+// Récupération de l'orderId et du prix total dans le local storage & suppression du panier
 
 let orderIdLocalStorage = (localStorage.getItem("orderId"));
 let priceTotalLocalStorage = (localStorage.getItem("priceTotal"));
 localStorage.removeItem("product");
 
-// Fonction pour la structure HTML et l'affichage des données Id & Prix total sur la page confirmation
+// Fonction structure HTML et affichage des données de l'orderId et du prix total sur la page confirmation
 
 function onConfirmation(){
 

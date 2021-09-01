@@ -56,7 +56,7 @@ function presentationProduct(){
 
     .then(function(value){
         
-        // Apel des valeurs du produit dans la structure HTML
+        // Apel des valeurs du produit et dispersion dans la structure HTML
         
         const image = document.querySelector(".img-page-product");
             image.src = value.imageUrl;
@@ -67,7 +67,7 @@ function presentationProduct(){
         const description = document.querySelector(".description-page-product");
             description.innerHTML = value.description;
         
-        // Apel des valeurs prix dans la structure HTML et formatage du prix (centimes => euros) avec le constructeur Intl.NumberFormat
+        // Apel de la valeur prix produit dans la structure HTML et formatage du prix (centimes => euros) avec le constructeur Intl.NumberFormat
         
         const price = document.querySelector(".price-page-product");
             value.price = value.price / 100;
@@ -76,7 +76,7 @@ function presentationProduct(){
             currency: "EUR",
             }).format(value.price);
         
-        // Boucle qui permet l'affichage des éléments du tableau de couleur de personnalisation de l'API 
+        // Boucle qui permet la récupération des valeurs couleurs et l'affichage dans la structure HTML en créant dynamiquement des balises option
         
         for (color of value.colors)
         {
@@ -90,9 +90,8 @@ function presentationProduct(){
         /* récupération des données produits séléctionner par l'utilisateur pour le local storage et envoi au panier */
         
         let linkBasket =  document.querySelector(".link-page-product")
-        .addEventListener('click',function(event){
+        .addEventListener('click',function(){
 
-            event.stopPropagation();
             
             // récupèration de la valeur de l'input qui permet le choix de la quantité produit
                
