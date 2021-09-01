@@ -137,7 +137,8 @@ function presentationProduct(){
                             
                         } if(valuesProduct.name !== item.name) {
                            
-                            items.push(valuesProduct);   
+                            items.push(valuesProduct);
+                            break;   
                         }
                     }
                     
