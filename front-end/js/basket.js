@@ -174,7 +174,7 @@ function deleteAllBasket(){
                 <div class="invalid-feedback">Saisie Incorrect - Veuillez saisir un email valide.</div>
             </div>
         </div>
-        <button type="submit" onSubmit="submit()" class="btn-form btn-success mt-2 text-white" onclick="getValue();">Commander</button>
+        <button type="submit" onSubmit="submit()" class="btn-form btn-success mt-2 text-white rounded" onclick="getValue();">Commander</button>
     </form>`;
 
     sectionFormulaireClient.innerHTML = formulaireClient;
@@ -248,7 +248,6 @@ function getValue() {
         document.getElementById("form").onsubmit = function()
         {
             window.location.href("confirmation.html");
-            
         }
     }) 
 };

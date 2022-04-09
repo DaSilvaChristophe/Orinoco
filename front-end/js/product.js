@@ -35,7 +35,7 @@ function structureHtml(){
         <button class="btn-page-product bg-white rounded">
             <a class="link-page-product text-success text-decoration-none "> Ajouter au panier </a>
         </button>
-        <a class="link-return-home mx-auto text-white text-decoration-none" href="index.html"> < Retour Accueil </a>`;
+        <a class="link-return-home mx-auto text-decoration-none my-2 px-2 py-1 rounded" href="index.html"> Accueil </a>`;
 
         newElementArticle.innerHTML = structureProduct;
 };
@@ -62,8 +62,6 @@ function presentationProduct(){
         
         // Apel des valeurs du produit et dispersion dans la structure HTML
         
-   
-
         const image = document.querySelector(".img-page-product");
             image.src = value.imageUrl;
         
@@ -127,26 +125,13 @@ function presentationProduct(){
             // Création de la fonction qui permet l'ajout produits au local storage
             
             function additionLocalStorageProduct(){
-            
-                if (localStorage.getItem("product") !== null) {
+                
+                // JSON.parse = permet la convertion des données pour récupérer celle-ci dans le local storage (format JSON => Objet JavaScript) 
+                const items = JSON.parse(localStorage.getItem("product"))
+                
+                if (items !== null) {
                     
-                    // JSON.parse = permet la convertion des données pour récupérer celle-ci dans le local storage (format JSON => Objet JavaScript) 
-                    
-                    items = JSON.parse(localStorage.getItem("product"));
-                    
-                    for (let item of items){
-                        
-                        if(valuesProduct.name === item.name){
-                            
-                            item.quantity = valuesProduct.quantity;
-                            item.price = valuesProduct.price;
-                            
-                        } if(valuesProduct.name !== item.name) {
-                           
-                            items.push(valuesProduct);
-                            break;   
-                        }
-                    }
+                    items.push(valuesProduct)
                     
                     localStorage.setItem("product", JSON.stringify(items));
                     alertConfirmation()
@@ -158,6 +143,7 @@ function presentationProduct(){
                     productRegisteredLocalStorage.push(valuesProduct);
                      // JSON.stringify = convertion des données pour l'envoi dans local storage (Objet JavaScript => JSON);
                     localStorage.setItem("product", JSON.stringify(productRegisteredLocalStorage));
+                    alertConfirmation()
                 }  
             };
 
