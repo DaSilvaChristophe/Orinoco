@@ -12,22 +12,24 @@ function structureHtml(){
     let structureProduct = [];
 
         structureProduct = structureProduct + 
-        `<div class="div-img-page-product rounded">
-            <img class="img-page-product rounded" src=""alt="teddie">
+        `<h2 class="title-page-product fw-bold text-center my-3 py-1 bg-white"></h2>
+        <div class="div-img-page-product rounded">
+            <img class="img-page-product rounded shadow-sm" src=""alt="teddie">
         </div>
-        <div class="div-text-page-product text-center bg-white rounded">
-            <h2 class="title-page-product fw-bold "></h2>
-            <p class="description-page-product"></p>
-            <span class="price-page-product fw-bold"></span>
+        <div class="div-text-page-product text-center bg-white py-2">
+            <p class="description-page-product w-75 mx-auto"></p>
             <div class="div-form-page-product">
-                <form class="form-colors-page-product">
-                    Nos couleurs :
+                <form class="form-colors-page-product my-2">
+                    Couleurs :
                     <select class="select-page-product"></select> 
                 </form>
-                <form class="form-quantity-page-product" name="formquantity">
+                <form class="form-quantity-page-product mb-2" name="formquantity">
                     Quantité :
                     <input class="input-page-product" type="number" name="input" value="1" min="1" max="10">
                 </form>
+            </div>
+            <div class="my-3">
+            <span class="price-page-product fw-bold border py-2 px-2 shadow"></span>
             </div>
         </div>
         <button class="btn-page-product bg-white rounded">
@@ -37,6 +39,8 @@ function structureHtml(){
 
         newElementArticle.innerHTML = structureProduct;
 };
+
+structureHtml();
 
 // fonction qui permet l'apel API du produit seul via son id et enregistrement dans le local storage 
 
@@ -58,6 +62,8 @@ function presentationProduct(){
         
         // Apel des valeurs du produit et dispersion dans la structure HTML
         
+   
+
         const image = document.querySelector(".img-page-product");
             image.src = value.imageUrl;
         
@@ -152,8 +158,6 @@ function presentationProduct(){
                     productRegisteredLocalStorage.push(valuesProduct);
                      // JSON.stringify = convertion des données pour l'envoi dans local storage (Objet JavaScript => JSON);
                     localStorage.setItem("product", JSON.stringify(productRegisteredLocalStorage));
-                    
-                    alertConfirmation()
                 }  
             };
 
@@ -163,12 +167,7 @@ function presentationProduct(){
     });
 };
 
-
-// apel des fonctions après que le HTML soit totalement chargé
-
-document.addEventListener('DOMContentLoaded', function(){
+presentationProduct();
     
-    structureHtml();
-    presentationProduct();
+
     
-});

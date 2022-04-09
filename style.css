@@ -11506,7 +11506,7 @@ fieldset:disabled .btn {
 
 html, body {
   width: 100%;
-  height: auto;
+  height: 100%;
   font-family: 'Times New Roman', Times, serif;
 }
 
@@ -11520,12 +11520,20 @@ html, body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+@media (max-width: 574px) {
+  .nav-icons {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: start;
+  }
 }
 
 .nav-icons .bi-person-circle {
@@ -11536,6 +11544,14 @@ html, body {
   font-size: 1.4em;
 }
 
+/* .collapse{
+    @media (max-width: 574px) {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+       
+    }
+} */
 footer {
   width: 100%;
   height: auto;
@@ -11552,7 +11568,7 @@ footer i {
   display: flex;
 }
 
-@media (max-width: 698px) {
+@media (max-width: 992px) {
   #list-products {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
@@ -11572,7 +11588,7 @@ footer i {
   margin: 0 5px;
 }
 
-@media (max-width: 698px) {
+@media (max-width: 992px) {
   #list-products .article-products {
     width: 45%;
   }
@@ -11588,14 +11604,15 @@ footer i {
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 6px;
+  -webkit-box-shadow: 3px 3px 2px 1px #d1cece;
+          box-shadow: 3px 3px 2px 1px #d1cece;
 }
 
 #list-products .article-products .div-text {
   height: 17%;
   margin: 5px;
   text-align: center;
-  background: -webkit-gradient(linear, left top, right top, from(#e6b932), color-stop(60%, #bf870d));
-  background: linear-gradient(90deg, #e6b932 0%, #bf870d 60%);
+  background: white;
   border-radius: 0px 10px 0 10px;
 }
 
@@ -11604,13 +11621,26 @@ footer i {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  margin-top: 8px;
+  margin-top: 10px;
+  padding-top: 1px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+#list-products .article-products .div-text .price-products {
+  font-size: 1.2em;
+  padding: 4px;
+  font-weight: bold;
 }
 
 #list-products .article-products .btn-products {
   width: 100%;
   background-color: #fff;
   border-radius: 6px;
+  margin-top: 5px;
+  border: none;
+  -webkit-box-shadow: 3px 3px 2px 1px #d1cece;
+          box-shadow: 3px 3px 2px 1px #d1cece;
 }
 
 #list-products .article-products .btn-products .link-products {
@@ -11627,21 +11657,32 @@ footer i {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-animation: apparition-div-princ 4s ease 0s forwards;
+          animation: apparition-div-princ 4s ease 0s forwards;
 }
 
 #presentation-product .div-img-page-product {
   width: 90%;
   margin: 10px auto;
+  text-align: center;
 }
 
 #presentation-product .div-img-page-product .img-page-product {
   width: 100%;
+  height: auto;
   -o-object-fit: cover;
      object-fit: cover;
+  width: 50%;
+}
+
+@media (max-width: 768px) {
+  #presentation-product .div-img-page-product .img-page-product {
+    width: 70%;
+  }
 }
 
 #presentation-product .div-text-page-product {
-  width: 85%;
+  width: 100%;
   margin: 10px auto;
 }
 
@@ -11662,6 +11703,8 @@ footer i {
 
 #presentation-product .div-text-page-product .div-form-page-product {
   margin-bottom: 8px;
+  border-bottom: 1px solid black;
+  margin-bottom: 3px;
 }
 
 #presentation-product .div-text-page-product .div-form-page-product .input-page-product {
@@ -11674,15 +11717,21 @@ footer i {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 50%;
+  width: 30%;
   height: 35px;
   margin: 3px auto;
   padding: 3px 0;
 }
 
+@media (min-width: 449px) and (max-width: 768px) {
+  #presentation-product .btn-page-product {
+    width: 42%;
+  }
+}
+
 @media (max-width: 448px) {
   #presentation-product .btn-page-product {
-    width: 70%;
+    width: 50%;
   }
 }
 
@@ -11692,7 +11741,25 @@ footer i {
 }
 
 #presentation-product .link-return-home {
-  margin-bottom: 2px;
+  margin-bottom: 5px;
+}
+
+/* Animations CSS */
+@-webkit-keyframes apparition-div-princ {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes apparition-div-princ {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .div-total-basket {

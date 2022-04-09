@@ -69,7 +69,7 @@ function listProducts(){
     
     .catch(function(err) {
         document.getElementById("oursteddies")
-        .innerHTML = "Connectez-vous sur le port logiciel 3000 afin de voir notre collection de Teddies, si le problème persiste contactez-nous directement via le lien contact de la page.";
+        .innerHTML = "Connectez-vous sur le port 3000 afin de voir notre collection de Teddies, si le problème persiste contactez-nous directement via le lien contact de la page.";
      })
 };
 

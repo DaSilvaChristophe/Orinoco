@@ -1,25 +1,32 @@
 #presentation-product
-    
 {
     width: 75%;
     display: flex;
     flex-direction: column;
+    animation: apparition-div-princ 4s ease 0s forwards;
 
     .div-img-page-product
     {
         width: 90%;
         margin: 10px auto;
+        text-align: center;
 
         .img-page-product
         {
             width: $width100;
-            object-fit: cover; 
+            height: auto;
+            object-fit: cover;
+            width: 50%;
+
+            @media (max-width: 768px) {
+                width: 70%;
+            }
         }
     }
         
     .div-text-page-product
     {
-        width: 85%;
+        width: 100%;
         margin: 10px auto;
     
         .title-page-product
@@ -43,6 +50,8 @@
         .div-form-page-product
         {
             margin-bottom: 8px;
+            border-bottom: 1px solid black;
+            margin-bottom: 3px;
 
             .input-page-product
             {
@@ -56,13 +65,17 @@
     .btn-page-product
     {
         align-items: center;
-        width: 50%;
+        width: 30%;
         height: 35px;
         margin: 3px auto;            
         padding: 3px 0;
 
+        @media (min-width: 449px) and (max-width: 768px) {
+            width: 42%;
+        }
+
         @media (max-width: 448px) {
-            width: 70%;
+            width: 50%;
         }
         
         .link-page-product
@@ -74,6 +87,17 @@
 
     .link-return-home
     {
-        margin-bottom: 2px;
+        margin-bottom: 5px;
     }
 }
+
+/* Animations CSS */
+
+@keyframes apparition-div-princ {
+    from {
+      opacity: 0
+    }
+    to {
+      opacity: 1;
+    }
+  }

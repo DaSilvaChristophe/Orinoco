@@ -1,8 +1,14 @@
 .nav-icons
 {
     display: flex;
-    justify-content: flex-end;
     align-items: center;
+
+    
+    @media (max-width: 574px) {
+        display: flex;
+        justify-content: start;
+       
+    }
 
     .bi-person-circle
     {
@@ -14,3 +20,12 @@
         font-size: 1.4em;
     }
 }
+
+/* .collapse{
+    @media (max-width: 574px) {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+       
+    }
+} */
